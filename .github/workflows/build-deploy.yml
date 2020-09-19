@@ -18,10 +18,21 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
+      working-directory: src/blazorwasm
       run: dotnet restore
-    - name: Build
+    - name: Build 🎉
+      working-directory: src/blazorwasm
       run: dotnet build --configuration Release --no-restore
-    - name: Test
+    - name: Test 💚
+      working-directory: src/blazorwasm
       run: dotnet test --no-restore --verbosity normal
-    - name: Publish
+    - name: Publish 🎁
+      working-directory: src/blazorwasm
       run: dotnet publish -c Release
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: master
+          FOLDER: src/blazorwasm/bin/Release/netstandard2.1/publish/wwwroot
+          TARGET_FOLDER: docs
