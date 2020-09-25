@@ -33,6 +33,11 @@ jobs:
     - name: Publish 🎁
       working-directory: src/blazorwasm
       run: dotnet publish -c Release
+    - name: Rewrite base href 🎅🏼
+      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
+      with:
+        html_path: ${{ env.PUBLISH_DIR }}/index.html
+        base_href: /csharpcodespacetrial/
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
